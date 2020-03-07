@@ -1,2 +1,2 @@
-# Effective-Front-End
-小试牛刀
+#My Vue Project
+Priactice Vue、Enjoy Code、Enjoy Efficient Front End
