@@ -5,6 +5,14 @@ new Vue({
             content:"This is a note",
         }
 
+    },
+    computed:{
+        notePreview(){
+            return marked(this.content)
+
+
+        }
+
     }
 
 })
