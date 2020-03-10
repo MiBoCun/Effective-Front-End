@@ -3,15 +3,15 @@ var initTop=undefined;
 var elementPopup=undefined;
 
 window.onload=function () {
-     init();
+    init();
 }
 
 function init() {
     initLeft=Math.random()*300;
     initTop=Math.random()*100;
     elementPopup=document.getElementById("MovingPopup");
-    elementPopup.style.left=initLeft;
-    elementPopup.style.top=initTop;
+    elementPopup.style.left=initLeft+"px";
+    elementPopup.style.top=initTop+"px";
     setInterval("MovingPopup()",100);
 
 }
