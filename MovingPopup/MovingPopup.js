@@ -1,11 +1,27 @@
 var initLeft=undefined;
 var initTop=undefined;
-var elementPopup=undefined;
 var windowWidth=undefined;
 var windowHeight=undefined;
+var popupEle=undefined;
+var loopSet=undefined;
 
 window.onload=function () {
-    init();
+
+    popupEle=document.getElementById("movingPopup");
+    popupEle.onmouseover=function(){
+        clearInterval(loopSet);
+
+    };
+    popupEle.onmouseout=function(){
+        if(loopSet!=null){
+            //判断计时器是否为空
+            clearInterval(loopSet);
+            loopSet=null;
+        }
+       loopSet=setInterval("movingPopup()",200);
+
+    }
+   init();
     
 }
 
@@ -14,40 +30,34 @@ function init() {
     initTop=Math.random()*100;
     windowWidth=document.body.clientWidth;
     windowHeight=document.body.clientHeight;
-
-    elementPopup=document.getElementById("movingPopup");
-    elementPopup.style.left=initLeft+"px";
-    elementPopup.style.top=initTop+"px";
-    setInterval("movingPopup()",200);
+    popupEle.style.left=initLeft+"px";
+    popupEle.style.top=initTop+"px";
+    loopSet=setInterval("movingPopup()",200);
 
 }
 
 function movingPopup() {
-	var currentLeft=elementPopup.style.left;    
-	var currentTop=elementPopup.style.top;
+	var currentLeft=popupEle.style.left;
+	var currentTop=popupEle.style.top;
 	
     var currentLeftNum=toNumber(currentLeft);
     var currentTopNum=toNumber(currentTop);
-   
-   // console.log(currentBottom);
+
 
     if((currentTopNum+100)>=windowHeight){
-       elementPopup.style.top=(currentTopNum-10)+"px";
+        popupEle.style.top=(currentTopNum-10)+"px";
+        popupEle.style.left=(currentLeftNum+10)+"px";
     }else{
-    	elementPopup.style.top=(currentTopNum+10)+"px";
+        popupEle.style.top=(currentTopNum+10)+"px";
+        popupEle.style.left=(currentLeftNum+10)+"px";
     }
 
-    if((currentLeftNum+400)>=windowWidth){
-       elementPopup.style.left=(currentLeftNum-10)+"px";
-    }else{
-    	elementPopup.style.left=(currentLeftNum+10)+"px";
-    }
-    //elementPopup.style.left=(currentLeftNum+10)+"px";
+
+   ;
     
 }
 
 function toNumber(cssString){
 	return parseInt(cssString.replace("px",""));
-      
 
 }
